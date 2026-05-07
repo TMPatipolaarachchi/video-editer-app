@@ -7,7 +7,7 @@ import { promises as fs } from 'node:fs'
 import path from 'node:path'
 
 const app = express()
-const port = 3001
+const port = process.env.PORT || 3001
 const uploadDirectory = path.join(process.cwd(), 'server-work')
 
 await fs.mkdir(uploadDirectory, { recursive: true })
@@ -248,11 +248,11 @@ app.post(
   },
 )
 
-app.listen(port, '127.0.0.1', () => {
-  console.log(`[✓] Render server ready on http://localhost:${port}`)
+app.listen(port, '0.0.0.0', () => {
+  console.log(`[✓] Render server ready on port ${port}`)
   console.log(`[✓] CORS enabled - accepting requests from any origin`)
-  console.log(`[✓] Health check: GET http://localhost:${port}/api/health`)
-  console.log(`[✓] Render endpoint: POST http://localhost:${port}/api/render`)
+  console.log(`[✓] Health check: GET /api/health`)
+  console.log(`[✓] Render endpoint: POST /api/render`)
 })
 
 process.on('uncaughtException', (error) => {
