@@ -10,6 +10,7 @@ import {
   Upload,
   Video,
   Volume2,
+  Zap,
 } from 'lucide-react'
 import './App.css'
 
@@ -236,229 +237,299 @@ function App() {
   }
 
   return (
-    <div className="app-shell">
-      <div className="ambient ambient-a" />
-      <div className="ambient ambient-b" />
-
-      <header className="hero-card">
-        <div className="hero-copy">
-          <span className="eyebrow">
-            <Sparkles size={14} /> Social media video studio
-          </span>
-          <h1>Upload a clip, trim the cut, change the speed, mute it, and add music.</h1>
-          <p>
-            Build a ready-to-post MP4 in the browser with a focused edit flow for
-            short-form social content.
-          </p>
-        </div>
-
-        <div className="hero-stats">
-          <div>
-            <strong>Trim</strong>
-            <span>Pick the start and end of the clip you want to post.</span>
+    <div className="app">
+      {/* Professional Header */}
+      <header className="app-header">
+        <div className="header-container">
+          <div className="logo-section">
+            <div className="logo-icon">
+              <Zap size={24} />
+            </div>
+            <div className="logo-text">
+              <h1>VideoStudio</h1>
+              <span>Professional Editing</span>
+            </div>
           </div>
-          <div>
-            <strong>Speed</strong>
-            <span>Slow down for emphasis or speed up for punchier cuts.</span>
-          </div>
-          <div>
-            <strong>Audio</strong>
-            <span>Mute the original track and layer in your own music.</span>
-          </div>
+          <nav className="header-nav">
+            <a href="#features" className="nav-link">Features</a>
+            <a href="#editor" className="nav-link">Editor</a>
+          </nav>
         </div>
       </header>
 
-      <main className="editor-grid">
-        <section className="panel panel-upload">
-          <div className="panel-heading">
-            <div>
-              <span className="panel-kicker">1. Import media</span>
-              <h2>Video and music</h2>
-            </div>
-            <Upload size={22} />
+      {/* Showcase Section */}
+      <div className="showcase" id="features">
+        <div className="ambient ambient-a" />
+        <div className="ambient ambient-b" />
+        <div className="showcase-container">
+          <div className="showcase-intro">
+            <h1>Studio-Grade Video Editing</h1>
+            <p>Everything you need to create professional social media content—right in your browser.</p>
           </div>
-
-          <label className="dropzone" htmlFor="video-upload">
-            <input
-              id="video-upload"
-              type="file"
-              accept="video/*"
-              onChange={(event) => handleVideoChange(event.target.files?.[0] ?? null)}
-            />
-            <Video size={28} />
-            <strong>{videoFile ? videoFile.name : 'Drop or choose a video'}</strong>
-            <span>MP4, MOV, and WebM clips work well for export.</span>
-          </label>
-
-          <label className="field-label" htmlFor="music-upload">
-            <span>
-              <Music2 size={16} /> Optional music track
-            </span>
-            <input
-              id="music-upload"
-              type="file"
-              accept="audio/*"
-              onChange={(event) => handleMusicChange(event.target.files?.[0] ?? null)}
-            />
-          </label>
-
-          <div className="file-chip-row">
-            {videoFile ? (
-              <span className="chip chip-video">Video ready</span>
-            ) : (
-              <span className="chip">Waiting for video</span>
-            )}
-            {musicFile ? (
-              <span className="chip chip-music">Music ready</span>
-            ) : (
-              <span className="chip">Music optional</span>
-            )}
-          </div>
-
-          <div className="tip-box">
-            <Scissors size={16} />
-            <p>Use crop to trim the part of the video you want to share.</p>
-          </div>
-        </section>
-
-        <section className="panel panel-preview">
-          <div className="panel-heading">
-            <div>
-              <span className="panel-kicker">2. Preview and adjust</span>
-              <h2>Timeline, speed, and mute</h2>
-            </div>
-            <Gauge size={22} />
-          </div>
-
-          <div className="video-frame">
-            {videoUrl ? (
-              <video
-                ref={previewRef}
-                src={videoUrl}
-                controls
-                playsInline
-                onLoadedMetadata={handleLoadedMetadata}
-              />
-            ) : (
-              <div className="video-placeholder">
-                <Video size={32} />
-                <p>Your preview will appear here after you upload a video.</p>
+          
+          <div className="showcase-grid">
+            <div className="showcase-card showcase-card-1">
+              <div>
+                <div className="showcase-label">Precision Control</div>
+                <h3 className="showcase-title">Timeline Mastery</h3>
+                <p className="showcase-desc">Frame-perfect trimming and editing controls for professional-grade cuts.</p>
               </div>
-            )}
-          </div>
-
-          <div className="range-grid">
-            <label className="range-card">
-              <span>Start</span>
-              <strong>{formatTime(trimStart)}</strong>
-              <input
-                type="range"
-                min="0"
-                max={Math.max(duration, 0)}
-                step="0.1"
-                value={trimStart}
-                onChange={(event) => handleTrimStartChange(Number(event.target.value))}
-                disabled={!duration}
-              />
-            </label>
-
-            <label className="range-card">
-              <span>End</span>
-              <strong>{formatTime(trimEnd || duration)}</strong>
-              <input
-                type="range"
-                min="0.1"
-                max={Math.max(duration, 0.1)}
-                step="0.1"
-                value={trimEnd || duration}
-                onChange={(event) => handleTrimEndChange(Number(event.target.value))}
-                disabled={!duration}
-              />
-            </label>
-          </div>
-
-          <div className="speed-block">
-            <div className="speed-header">
-              <Volume2 size={16} />
-              <span>Playback speed</span>
             </div>
-            <div className="speed-presets">
-              {speedPresets.map((preset) => (
-                <button
-                  key={preset}
-                  type="button"
-                  className={preset === speed ? 'speed-pill is-active' : 'speed-pill'}
-                  onClick={() => handleSpeedChange(preset)}
-                >
-                  {preset}x
-                </button>
-              ))}
+
+            <div className="showcase-card showcase-card-2">
+              <div>
+                <div className="showcase-label">Visual Effects</div>
+                <h3 className="showcase-title">Filter Forge</h3>
+                <p className="showcase-desc">Transform your clips with instant visual enhancements and filters.</p>
+              </div>
+            </div>
+
+            <div className="showcase-card showcase-card-3">
+              <div>
+                <div className="showcase-label">Speed Control</div>
+                <h3 className="showcase-title">Motion Graphics</h3>
+                <p className="showcase-desc">Play with speed, tempo, and timing for dynamic visual storytelling.</p>
+              </div>
+            </div>
+
+            <div className="showcase-card showcase-card-4">
+              <div>
+                <div className="showcase-label">Audio Suite</div>
+                <h3 className="showcase-title">Soundtrack Studio</h3>
+                <p className="showcase-desc">Mix, mute, and layer audio tracks with intuitive controls.</p>
+              </div>
             </div>
           </div>
+        </div>
+      </div>
 
-          <label className="mute-toggle">
-            <input
-              type="checkbox"
-              checked={muteOriginal}
-              onChange={(event) => {
-                setMuteOriginal(event.target.checked)
-                setStatus(event.target.checked ? 'Original audio muted.' : 'Original audio restored.')
-                clearRenderedOutput()
-              }}
-            />
-            <span>Mute original audio while exporting</span>
-          </label>
-        </section>
+      {/* Editor Section */}
+      <div className="editor-section" id="editor">
+        <div className="app-shell">
+          <div className="ambient ambient-a" />
+          <div className="ambient ambient-b" />
 
-        <section className="panel panel-export">
-          <div className="panel-heading">
-            <div>
-              <span className="panel-kicker">3. Export</span>
-              <h2>Render the final MP4</h2>
+          <header className="hero-card">
+            <div className="hero-copy">
+              <span className="eyebrow">
+                <Sparkles size={14} /> Social media video studio
+              </span>
+              <h1>Upload a clip, trim the cut, change the speed, mute it, and add music.</h1>
+              <p>
+                Build a ready-to-post MP4 in the browser with a focused edit flow for
+                short-form social content.
+              </p>
             </div>
-            <Download size={22} />
-          </div>
 
-          <button
-            type="button"
-            className="export-button"
-            onClick={handleExport}
-            disabled={!videoFile || isProcessing}
-          >
-            {isProcessing ? <LoaderCircle className="spin" size={18} /> : <Download size={18} />}
-            {isProcessing ? 'Rendering your edit' : 'Export video'}
-          </button>
-
-          <div className="progress-shell" aria-hidden="true">
-            <div className="progress-fill" style={{ width: `${progress * 100}%` }} />
-          </div>
-
-          <div className="status-card">
-            <p>{status}</p>
-            <span>
-              {duration
-                ? `${formatTime(trimStart)} - ${formatTime(trimEnd || duration)} at ${speed.toFixed(2)}x`
-                : 'Waiting for a source video.'}
-            </span>
-          </div>
-
-          {outputUrl ? (
-            <div className="result-card">
-              <strong>Rendered file</strong>
-              <p>{outputName}</p>
-              <video src={outputUrl} controls playsInline />
-              <a href={outputUrl} download={outputName} className="download-link">
-                <Download size={16} /> Download MP4
-              </a>
+            <div className="hero-stats">
+              <div>
+                <strong>Trim</strong>
+                <span>Pick the start and end of the clip you want to post.</span>
+              </div>
+              <div>
+                <strong>Speed</strong>
+                <span>Slow down for emphasis or speed up for punchier cuts.</span>
+              </div>
+              <div>
+                <strong>Audio</strong>
+                <span>Mute the original track and layer in your own music.</span>
+              </div>
             </div>
-          ) : (
-            <div className="result-card empty-state">
-              <strong>No export yet</strong>
-              <p>Your finished video will appear here after rendering.</p>
-            </div>
-          )}
-        </section>
-      </main>
+          </header>
+
+          <main className="editor-grid">
+            <section className="panel panel-upload">
+              <div className="panel-heading">
+                <div>
+                  <span className="panel-kicker">1. Import media</span>
+                  <h2>Video and music</h2>
+                </div>
+                <Upload size={22} />
+              </div>
+
+              <label className="dropzone" htmlFor="video-upload">
+                <input
+                  id="video-upload"
+                  type="file"
+                  accept="video/*"
+                  onChange={(event) => handleVideoChange(event.target.files?.[0] ?? null)}
+                />
+                <Video size={28} />
+                <strong>{videoFile ? videoFile.name : 'Drop or choose a video'}</strong>
+                <span>MP4, MOV, and WebM clips work well for export.</span>
+              </label>
+
+              <label className="field-label" htmlFor="music-upload">
+                <span>
+                  <Music2 size={16} /> Optional music track
+                </span>
+                <input
+                  id="music-upload"
+                  type="file"
+                  accept="audio/*"
+                  onChange={(event) => handleMusicChange(event.target.files?.[0] ?? null)}
+                />
+              </label>
+
+              <div className="file-chip-row">
+                {videoFile ? (
+                  <span className="chip chip-video">Video ready</span>
+                ) : (
+                  <span className="chip">Waiting for video</span>
+                )}
+                {musicFile ? (
+                  <span className="chip chip-music">Music ready</span>
+                ) : (
+                  <span className="chip">Music optional</span>
+                )}
+              </div>
+
+              <div className="tip-box">
+                <Scissors size={16} />
+                <p>Use crop to trim the part of the video you want to share.</p>
+              </div>
+            </section>
+
+            <section className="panel panel-preview">
+              <div className="panel-heading">
+                <div>
+                  <span className="panel-kicker">2. Preview and adjust</span>
+                  <h2>Timeline, speed, and mute</h2>
+                </div>
+                <Gauge size={22} />
+              </div>
+
+              <div className="video-frame">
+                {videoUrl ? (
+                  <video
+                    ref={previewRef}
+                    src={videoUrl}
+                    controls
+                    playsInline
+                    onLoadedMetadata={handleLoadedMetadata}
+                  />
+                ) : (
+                  <div className="video-placeholder">
+                    <Video size={32} />
+                    <p>Your preview will appear here after you upload a video.</p>
+                  </div>
+                )}
+              </div>
+
+              <div className="range-grid">
+                <label className="range-card">
+                  <span>Start</span>
+                  <strong>{formatTime(trimStart)}</strong>
+                  <input
+                    type="range"
+                    min="0"
+                    max={Math.max(duration, 0)}
+                    step="0.1"
+                    value={trimStart}
+                    onChange={(event) => handleTrimStartChange(Number(event.target.value))}
+                    disabled={!duration}
+                  />
+                </label>
+
+                <label className="range-card">
+                  <span>End</span>
+                  <strong>{formatTime(trimEnd || duration)}</strong>
+                  <input
+                    type="range"
+                    min="0.1"
+                    max={Math.max(duration, 0.1)}
+                    step="0.1"
+                    value={trimEnd || duration}
+                    onChange={(event) => handleTrimEndChange(Number(event.target.value))}
+                    disabled={!duration}
+                  />
+                </label>
+              </div>
+
+              <div className="speed-block">
+                <div className="speed-header">
+                  <Volume2 size={16} />
+                  <span>Playback speed</span>
+                </div>
+                <div className="speed-presets">
+                  {speedPresets.map((preset) => (
+                    <button
+                      key={preset}
+                      type="button"
+                      className={preset === speed ? 'speed-pill is-active' : 'speed-pill'}
+                      onClick={() => handleSpeedChange(preset)}
+                    >
+                      {preset}x
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <label className="mute-toggle">
+                <input
+                  type="checkbox"
+                  checked={muteOriginal}
+                  onChange={(event) => {
+                    setMuteOriginal(event.target.checked)
+                    setStatus(event.target.checked ? 'Original audio muted.' : 'Original audio restored.')
+                    clearRenderedOutput()
+                  }}
+                />
+                <span>Mute original audio while exporting</span>
+              </label>
+            </section>
+
+            <section className="panel panel-export">
+              <div className="panel-heading">
+                <div>
+                  <span className="panel-kicker">3. Export</span>
+                  <h2>Render the final MP4</h2>
+                </div>
+                <Download size={22} />
+              </div>
+
+              <button
+                type="button"
+                className="export-button"
+                onClick={handleExport}
+                disabled={!videoFile || isProcessing}
+              >
+                {isProcessing ? <LoaderCircle className="spin" size={18} /> : <Download size={18} />}
+                {isProcessing ? 'Rendering your edit' : 'Export video'}
+              </button>
+
+              <div className="progress-shell" aria-hidden="true">
+                <div className="progress-fill" style={{ width: `${progress * 100}%` }} />
+              </div>
+
+              <div className="status-card">
+                <p>{status}</p>
+                <span>
+                  {duration
+                    ? `${formatTime(trimStart)} - ${formatTime(trimEnd || duration)} at ${speed.toFixed(2)}x`
+                    : 'Waiting for a source video.'}
+                </span>
+              </div>
+
+              {outputUrl ? (
+                <div className="result-card">
+                  <strong>Rendered file</strong>
+                  <p>{outputName}</p>
+                  <video src={outputUrl} controls playsInline />
+                  <a href={outputUrl} download={outputName} className="download-link">
+                    <Download size={16} /> Download MP4
+                  </a>
+                </div>
+              ) : (
+                <div className="result-card empty-state">
+                  <strong>No export yet</strong>
+                  <p>Your finished video will appear here after rendering.</p>
+                </div>
+              )}
+            </section>
+          </main>
+        </div>
+      </div>
     </div>
   )
 }

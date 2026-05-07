@@ -4,12 +4,11 @@ import multer from 'multer'
 import ffmpegPath from 'ffmpeg-static'
 import { spawn } from 'node:child_process'
 import { promises as fs } from 'node:fs'
-import os from 'node:os'
 import path from 'node:path'
 
 const app = express()
 const port = 3001
-const uploadDirectory = path.join(os.tmpdir(), 'video-editor-app-uploads')
+const uploadDirectory = path.join(process.cwd(), 'server-work')
 
 await fs.mkdir(uploadDirectory, { recursive: true })
 
@@ -120,6 +119,7 @@ app.post(
     }
 
     const safeSpeed = Math.min(2, Math.max(0.5, Number.isFinite(speed) ? speed : 1))
+    const renderDuration = Math.max(0.1, (end - start) / safeSpeed)
     const outputPath = path.join(uploadDirectory, `${Date.now()}-rendered.mp4`)
     const outputName = `${path.basename(videoFile.originalname, path.extname(videoFile.originalname))}-edited.mp4`
 
@@ -157,6 +157,8 @@ app.post(
               ...trimArgs,
               '-stream_loop',
               '-1',
+              '-t',
+              String(renderDuration),
               '-i',
               musicFile.path,
               '-filter_complex',
@@ -190,6 +192,8 @@ app.post(
               ...trimArgs,
               '-stream_loop',
               '-1',
+              '-t',
+              String(renderDuration),
               '-i',
               musicFile.path,
               '-filter_complex',
