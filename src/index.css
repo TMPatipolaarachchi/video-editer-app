@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap');
+
+:root {
+  color-scheme: dark;
+  font-family: 'Space Grotesk', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  --bg: #070b16;
+  --surface: rgba(255, 255, 255, 0.04);
+  --surface-strong: rgba(255, 255, 255, 0.08);
+  --border-soft: rgba(255, 255, 255, 0.12);
+  --text: #b8c1d9;
+  --text-strong: #f8fafc;
+  --text-muted: #90a0bf;
+  --accent: #ff7a45;
+  --accent-2: #20c997;
+  --accent-3: #66a6ff;
+  background:
+    radial-gradient(circle at top left, rgba(255, 122, 69, 0.14), transparent 30%),
+    radial-gradient(circle at top right, rgba(102, 166, 255, 0.16), transparent 28%),
+    linear-gradient(180deg, #050814 0%, #0b1020 42%, #060912 100%);
+  color: var(--text);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: transparent;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  color: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+::selection {
+  background: rgba(255, 122, 69, 0.28);
+  color: #fff;
+}
